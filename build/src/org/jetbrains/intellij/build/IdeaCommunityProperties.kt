@@ -186,6 +186,7 @@ class GitUiProperties(communityHomeDir: Path) : IdeaCommunityProperties(communit
   override fun getProductContentDescriptor(): ProductModulesContentSpec = productModules {
     include(intellijCommunityBaseFragment(platformPrefix))
 
+    deprecatedInclude("intellij.idea.community.customization", "META-INF/GitUIPlugin.xml")
     bundledPlugins(productLayout.bundledPluginModules)
   }
 

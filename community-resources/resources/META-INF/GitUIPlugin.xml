@@ -1,1 +1,5 @@
-<idea-plugin/>
+<idea-plugin>
+  <actions>
+    <prohibit id="CodeMenu"/>
+  </actions>
+</idea-plugin>

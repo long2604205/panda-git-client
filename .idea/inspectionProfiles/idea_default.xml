@@ -33,7 +33,6 @@
       <scope name="build scripts" level="WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="6825bee2-fd98-3b9b-9d79-0a40c7fe55c0" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="722cb6a3-860d-3bb9-bfa3-d5ef834939d5" enabled="true" level="Strong Warning" enabled_by_default="true" editorAttributes="Strong Warning" />
     <inspection_tool class="7707f5d4-ccb9-3cbc-83e5-4e893e49804f" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="AA_fleet" level="WARNING" enabled="true" />
     </inspection_tool>
@@ -49,7 +48,6 @@
     <inspection_tool class="81c39993-de39-3a30-9c64-ab89d04bb566" enabled="true" level="TEXT ATTRIBUTES" enabled_by_default="false" editorAttributes="INFO_ATTRIBUTES">
       <scope name="Production" level="TEXT ATTRIBUTES" enabled="true" editorAttributes="INFO_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="2f2f891d-a1a8-40ae-b3cb-e52290744728" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="92d42a73-fb88-340b-88e5-4f09e27f9db6" enabled="true" level="WEAK WARNING" enabled_by_default="false" editorAttributes="INFO_ATTRIBUTES">
       <scope name="Go" level="WEAK WARNING" enabled="true" />
     </inspection_tool>
@@ -395,11 +393,6 @@
     </inspection_tool>
     <inspection_tool class="DuplicateThrows" enabled="true" level="Strong Warning" enabled_by_default="true" />
     <inspection_tool class="DuplicatedBlockNamesInspection" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
-      <Languages>
-        <language minSize="46" name="Kotlin" />
-      </Languages>
-    </inspection_tool>
     <inspection_tool class="DuplicatedDataProviderNames" enabled="false" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="EmptyFinallyBlock" enabled="true" level="Strong Warning" enabled_by_default="true" />
     <inspection_tool class="EmptyInitializer" enabled="true" level="Strong Warning" enabled_by_default="true" />
@@ -1088,7 +1081,7 @@
     <inspection_tool class="NewObjectEquality" enabled="true" level="Strong Warning" enabled_by_default="true" />
     <inspection_tool class="NewStringBufferWithCharArgument" enabled="true" level="Strong Warning" enabled_by_default="true" />
     <inspection_tool class="NoExplicitFinalizeCalls" enabled="true" level="Strong Warning" enabled_by_default="true" editorAttributes="Strong Warning" />
-    <inspection_tool class="NonAsciiCharacters" enabled="true" level="Strong Warning" enabled_by_default="true" editorAttributes="Strong Warning">
+    <inspection_tool class="NonAsciiCharacters" enabled="true" level="WARNING" enabled_by_default="true" editorAttributes="Strong Warning">
       <option name="CHECK_FOR_DIFFERENT_LANGUAGES_IN_STRING" value="true" />
     </inspection_tool>
     <inspection_tool class="NonDefaultConstructor" enabled="true" level="Strong Warning" enabled_by_default="true" />
@@ -4123,7 +4116,7 @@
       <scope name="EntityStorage" level="WARNING" enabled="true" />
     </inspection_tool>
     <inspection_tool class="b1ea9b48-958a-3fb9-b7b0-56879a7275b0" enabled="true" level="WARNING" enabled_by_default="false">
-      <scope name="Python" level="Strong Warning" enabled="true" editorAttributes="Strong Warning" />
+      <scope name="Python" level="WARNING" enabled="true" editorAttributes="Strong Warning" />
     </inspection_tool>
     <inspection_tool class="be0e4d0f-a75b-39d7-8c95-5c554e8fcb40" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="Go" level="WARNING" enabled="true" />
@@ -4136,8 +4129,6 @@
     <inspection_tool class="c9f1d44f-a345-34e5-8460-cf58d74c993d" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="java-decompiler-engine" level="WARNING" enabled="false" />
     </inspection_tool>
-    <inspection_tool class="dc4988c0-f98d-38af-8fc4-310d96dbdf1d" enabled="true" level="Strong Warning" enabled_by_default="true" editorAttributes="Strong Warning" />
-    <inspection_tool class="dddc1e5a-555b-3057-994e-cb75680b23c9" enabled="true" level="Strong Warning" enabled_by_default="true" />
     <inspection_tool class="e11e9d2f-7cc2-3359-a78a-24f67cbe0850" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Fleet" level="WARNING" enabled="false" />
     </inspection_tool>

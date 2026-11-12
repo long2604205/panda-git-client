@@ -6,6 +6,7 @@ import org.jetbrains.intellij.build.kotlin.KotlinPluginBuilder
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import java.nio.file.Files
 
 class GitUiPropertiesTest {
   @Test
@@ -52,5 +53,15 @@ class GitUiPropertiesTest {
     assertTrue("intellij.vcs.git" in bundledPlugins)
     assertTrue("intellij.terminal" in bundledPlugins)
     assertTrue(properties.productLayout.buildAllCompatiblePlugins)
+  }
+
+  @Test
+  fun `prohibits Code menu in GitUI descriptor`() {
+    val descriptor = COMMUNITY_ROOT.communityRoot.resolve("community-resources/resources/META-INF/GitUIPlugin.xml")
+    assertTrue(Files.readString(descriptor).contains("""<prohibit id="CodeMenu"/>"""))
+    val includes = GitUiProperties(COMMUNITY_ROOT.communityRoot).getProductContentDescriptor().deprecatedXmlIncludes
+    assertTrue(includes.any { it.resourcePath == "META-INF/GitUIPlugin.xml" })
+    val communityIncludes = IdeaCommunityProperties(COMMUNITY_ROOT.communityRoot).getProductContentDescriptor().deprecatedXmlIncludes
+    assertFalse(communityIncludes.any { it.resourcePath == "META-INF/GitUIPlugin.xml" })
   }
 }
