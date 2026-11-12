@@ -40,6 +40,17 @@ java_binary(
 )
 
 java_binary(
+    name = "gitui_installers_build_target",
+    add_opens = INTELLIJ_ADD_OPENS,
+    data = ALL_COMMUNITY_TARGETS + [BAZEL_TARGETS_JSON_COMMUNITY],
+    jvm_flags = [
+        "-Dintellij.build.bazel.targets.json.file=$(rlocationpath %s)" % BAZEL_TARGETS_JSON_COMMUNITY,
+    ],
+    main_class = "GitUiInstallersBuildTarget",
+    runtime_deps = [":build"],
+)
+
+java_binary(
     name = "run_tests_build_target",
     add_opens = INTELLIJ_ADD_OPENS,
     data = ALL_COMMUNITY_TARGETS + [BAZEL_TARGETS_JSON_COMMUNITY],
@@ -77,6 +88,11 @@ java_binary(
 intellij_dev_binary_community(
     name = "idea_community",
     platform_prefix = "community",
+)
+
+intellij_dev_binary_community(
+    name = "gitui",
+    platform_prefix = "GitUI",
 )
 
 intellij_dev_binary_community(

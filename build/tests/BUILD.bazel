@@ -34,6 +34,8 @@ jvm_library(
         "//platform/build-scripts/testFramework",
         "//platform/build-scripts/testFramework:testFramework_test_lib",
         "@lib//:kotlin-stdlib",
+        "//libraries/kotlinx/collections-immutable:libraries-kotlinx-collections-immutable",
+        "//libraries/kotlinx/collections-immutable:libraries-kotlinx-collections-immutable_test_lib",
         "//libraries/junit5",
         "//libraries/junit5:junit5_test_lib",
         "//libraries/assertj-core",

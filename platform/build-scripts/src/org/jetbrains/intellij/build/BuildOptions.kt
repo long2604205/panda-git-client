@@ -56,6 +56,12 @@ data class BuildOptions(
   @JvmField var classOutDir: String? = System.getProperty(PROJECT_CLASSES_OUTPUT_DIRECTORY_PROPERTY),
 
   @JvmField var forceRebuild: Boolean = getBooleanProperty(FORCE_REBUILD_PROPERTY),
+
+  /**
+   * Optional production module allowlist for product builds. `null` preserves compiling all production modules.
+   */
+  @Internal @JvmField var modulesToCompile: List<String>? = null,
+
   /**
    * If `true` and [ProductProperties.embeddedFrontendRootModule] is not null, the JAR files in the distribution will be adjusted
    * to allow starting JetBrains Client directly from the IDE's distribution.

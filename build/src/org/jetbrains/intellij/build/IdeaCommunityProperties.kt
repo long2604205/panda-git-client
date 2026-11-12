@@ -1,10 +1,12 @@
 // Copyright 2000-2026 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license.
 package org.jetbrains.intellij.build
 
+import com.intellij.util.io.sha256Hex
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.plus
 import org.jetbrains.intellij.build.BuildPaths.Companion.COMMUNITY_ROOT
+import org.jetbrains.intellij.build.dependencies.BuildDependenciesDownloader
 import org.jetbrains.intellij.build.impl.createBuildContext
 import org.jetbrains.intellij.build.impl.qodana.QodanaProductProperties
 import org.jetbrains.intellij.build.io.copyDir
@@ -12,8 +14,10 @@ import org.jetbrains.intellij.build.io.copyFileToDir
 import org.jetbrains.intellij.build.kotlin.KotlinBinaries
 import org.jetbrains.intellij.build.productLayout.CommunityModuleSets
 import org.jetbrains.intellij.build.productLayout.CommunityProductFragments
+import org.jetbrains.intellij.build.productLayout.DEFAULT_BUNDLED_PLUGINS
 import org.jetbrains.intellij.build.productLayout.ProductModulesContentSpec
 import org.jetbrains.intellij.build.productLayout.productModules
+import java.net.URI
 import java.nio.file.Path
 
 val MAVEN_ARTIFACTS_ADDITIONAL_MODULES: PersistentList<String> = persistentListOf(
@@ -41,9 +45,14 @@ internal suspend fun createCommunityBuildContext(
   )
 }
 
-open class IdeaCommunityProperties(private val communityHomeDir: Path) : JetBrainsProductProperties() {
+open class IdeaCommunityProperties @JvmOverloads constructor(
+  private val communityHomeDir: Path,
+  includeJavaPlatformSupport: Boolean = true,
+) : JetBrainsProductProperties() {
   init {
-    configurePropertiesForAllEditionsOfIntelliJIdea(this)
+    if (includeJavaPlatformSupport) {
+      configurePropertiesForAllEditionsOfIntelliJIdea(this)
+    }
     platformPrefix = "Idea"
     applicationInfoModule = "intellij.idea.community.customization"
     scrambleMainJar = false
@@ -64,11 +73,14 @@ open class IdeaCommunityProperties(private val communityHomeDir: Path) : JetBrai
 
     productLayout.prepareCustomPluginRepositoryForPublishedPlugins = false
     productLayout.buildAllCompatiblePlugins = true
-    productLayout.pluginLayouts = CommunityRepositoryModules.COMMUNITY_REPOSITORY_PLUGINS + persistentListOf(
-      JavaPluginLayout.javaPlugin(),
-      CommunityRepositoryModules.groovyPlugin(),
-      CommunityRepositoryModules.androidPlugin(allPlatforms = true),
-    )
+    productLayout.pluginLayouts = CommunityRepositoryModules.COMMUNITY_REPOSITORY_PLUGINS
+    if (includeJavaPlatformSupport) {
+      productLayout.pluginLayouts += persistentListOf(
+        JavaPluginLayout.javaPlugin(),
+        CommunityRepositoryModules.groovyPlugin(),
+        CommunityRepositoryModules.androidPlugin(allPlatforms = true),
+      )
+    }
 
     productLayout.skipUnresolvedContentModules = true
 
@@ -152,6 +164,67 @@ open class IdeaCommunityProperties(private val communityHomeDir: Path) : JetBrai
 
   override fun getOutputDirectoryName(appInfo: ApplicationInfoProperties): String = "idea-ce"
 }
+
+class GitUiProperties(communityHomeDir: Path) : IdeaCommunityProperties(communityHomeDir, includeJavaPlatformSupport = false) {
+  init {
+    platformPrefix = "GitUI"
+    productLayout.productImplementationModules = listOf(
+      "intellij.platform.starter",
+      "intellij.idea.community.customization",
+    )
+    productLayout.bundledPluginModules = GIT_UI_BUNDLED_PLUGINS
+    productLayout.buildAllCompatiblePlugins = false
+    buildCrossPlatformDistribution = false
+    buildSourcesArchive = false
+    buildDocAuthoringAssets = false
+    mavenArtifacts.forIdeModules = false
+    mavenArtifacts.additionalModules = persistentListOf()
+    mavenArtifacts.squashedModules = persistentListOf()
+    versionCheckerConfig = CE_CLASS_VERSIONS.filterKeys { it.isEmpty() || it.startsWith("lib/") && it != "lib/idea_rt.jar" }
+  }
+
+  override fun getProductContentDescriptor(): ProductModulesContentSpec = productModules {
+    include(intellijCommunityBaseFragment(platformPrefix))
+
+    bundledPlugins(productLayout.bundledPluginModules)
+  }
+
+  override fun getSystemSelector(appInfo: ApplicationInfoProperties, buildNumber: String): String {
+    return "GitUI${appInfo.majorVersion}.${appInfo.minorVersionMainPart}"
+  }
+
+  override fun getBaseArtifactName(appInfo: ApplicationInfoProperties, buildNumber: String): String = "gitui-$buildNumber"
+
+  override fun getOutputDirectoryName(appInfo: ApplicationInfoProperties): String = "gitui"
+
+  override suspend fun getAdditionalPluginPaths(context: BuildContext): List<Path> {
+    val url = URI.create("https://plugins.jetbrains.com/files/10044/1121122/Atom_Material_Icons-210.0.2.zip")
+    val archive = BuildDependenciesDownloader.downloadFileToCacheLocation(context.paths.communityHomeDirRoot, url)
+    check(sha256Hex(archive) == "43a2a7ed8103be89d2b904c3c9d242a3356c87e5dee4c6c121035560b11813ef") {
+      "Atom Material Icons archive checksum mismatch: $archive"
+    }
+    val extracted = BuildDependenciesDownloader.extractFileToCacheLocation(context.paths.communityHomeDirRoot, archive)
+    return listOf(extracted.resolve("Atom Material Icons"))
+  }
+}
+
+private val GIT_UI_BUNDLED_PLUGINS = DEFAULT_BUNDLED_PLUGINS
+  .removing("intellij.dev")
+  .removing("intellij.java.aetherDependencyResolver.plugin")
+  .removing("intellij.jcef.plugin")
+  .removing("intellij.platform.bookmarks.plugin")
+  .removing("intellij.grid.core.plugin")
+  .removing("intellij.platform.testRunner.plugin")
+  .removing("intellij.platform.structuralSearch.plugin")
+  .removing("intellij.platform.structureView.plugin")
+  .removing("intellij.platform.execution.serviceView.plugin")
+  .removing("intellij.platform.todo.plugin")
+  .removing("intellij.platform.acp.plugin") +
+  persistentListOf(
+    "intellij.vcs.git",
+    "intellij.terminal",
+    "intellij.textmate.plugin",
+  )
 
 @Suppress("unused")
 open class AndroidStudioProperties(communityHomeDir: Path) : IdeaCommunityProperties(communityHomeDir) {

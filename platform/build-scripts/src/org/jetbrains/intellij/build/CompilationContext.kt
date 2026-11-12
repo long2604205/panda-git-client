@@ -60,7 +60,7 @@ interface CompilationContext {
   suspend fun compileModules(moduleNames: Collection<String>?, includingTestsInModules: List<String>? = emptyList())
 
   suspend fun compileProductionModules() {
-    compileModules(moduleNames = null, includingTestsInModules = emptyList())
+    compileModules(moduleNames = options.modulesToCompile, includingTestsInModules = emptyList())
   }
 
   @Internal
