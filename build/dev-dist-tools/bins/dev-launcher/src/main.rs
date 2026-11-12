@@ -10,6 +10,7 @@
 //! The command `local-home --layout=<file> --output-dir=<directory>` links the local home of `PreBuiltDevMain`
 //! (`build/BUILD.bazel`, `local_home_tool`) by the same rules, and exits.
 
+mod argfile;
 mod devdata;
 mod local_home;
 mod process;
@@ -386,25 +387,39 @@ fn run_before_run(files: &Runfiles, executable: &str, env: &[(&'static str, Stri
 
 /// Replaces this process with the JVM of the IDE. Where a process cannot replace itself, it runs the JVM as a child
 /// and returns its exit code.
+///
+/// A command line that the host cannot start, which a Windows home below a deep output base states, goes through an
+/// argument file. This host waits for the JVM, so it deletes the file after the JVM exits. The other hosts replace this
+/// process with the JVM and never take a file, because their limit is far above any distribution.
 fn execute(launch: &Launch) -> i32 {
     if let Err(error) = std::env::set_current_dir(&launch.dir) {
         eprintln!("ERROR: {}: {error}", launch.dir);
         return 1;
     }
+    let arguments = match argfile::prepare(&launch.java, &launch.argv[1..]) {
+        Ok(arguments) => arguments,
+        Err(error) => {
+            eprintln!("ERROR: {error:#}");
+            return 1;
+        }
+    };
     let mut command = Command::new(&launch.java);
     command
-        .args(&launch.argv[1..])
+        .args(&arguments.values)
         .envs(launch.env.iter().map(|(name, value)| (name, value)));
     #[cfg(unix)]
     {
         use std::os::unix::process::CommandExt;
         let error = command.exec();
+        argfile::remove(&arguments);
         eprintln!("ERROR: cannot start {}: {error}", launch.java);
         1
     }
     #[cfg(not(unix))]
     {
-        match command.status() {
+        let status = command.status();
+        argfile::remove(&arguments);
+        match status {
             Ok(status) => status.code().unwrap_or(1),
             Err(error) => {
                 eprintln!("ERROR: cannot start {}: {error}", launch.java);
