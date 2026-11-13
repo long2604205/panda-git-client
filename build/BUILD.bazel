@@ -5,7 +5,7 @@ load("@rules_java//java:defs.bzl", "java_binary")
 load("@rules_jvm//:jvm.bzl", "jvm_library")
 load("//build:dev_dist_local_launch_test.bzl", "dev_dist_local_launch_test")
 load("//build:dev_dist_products.bzl", "DEV_DIST_PRODUCTS")
-load("//build:intellij_dev_community.bzl", "intellij_dev_platform_set_community")
+load("//build:intellij_dev_community.bzl", "intellij_dev_platform_set_community", "intellij_dev_run_configuration")
 load("//build:jps_to_bazel_targets_json.bzl", "jps_to_bazel_targets_json")
 load("//platform/build-scripts/bazel-rules:content_module_jar.bzl", "content_module_jar")
 load("//platform/build-scripts/bazel-rules:dev_dist_plugin_descriptor.bzl", "dev_dist_product_info")
@@ -137,6 +137,17 @@ java_binary(
         "-Dintellij.build.bazel.targets.json.file=$(rlocationpath %s)" % BAZEL_TARGETS_JSON_COMMUNITY,
     ],
     main_class = "OpenSourceCommunityInstallersBuildTarget",
+    runtime_deps = [":build"],
+)
+
+java_binary(
+    name = "panda_git_build",
+    add_opens = INTELLIJ_ADD_OPENS,
+    data = ALL_COMMUNITY_TARGETS + [BAZEL_TARGETS_JSON_COMMUNITY],
+    jvm_flags = [
+        "-Dintellij.build.bazel.targets.json.file=$(rlocationpath %s)" % BAZEL_TARGETS_JSON_COMMUNITY,
+    ],
+    main_class = "PandaGitBuildTarget",
     runtime_deps = [":build"],
 )
 
@@ -286,6 +297,14 @@ load("//build:dev_server_run_configurations.bzl", "dev_server_run_configurations
 
 # Dev-build targets for running IDEs locally via `bazel run //build:<target>`.
 dev_server_run_configurations()
+
+intellij_dev_run_configuration(
+    name = "panda_git_ui",
+    jvm_flags = [
+        "-Dawt.toolkit.name=auto",
+    ],
+    product = "Idea",
+)
 
 ### auto-generated section `dev intellij.platform.jps.build.dependencyGraph` start
 content_module_jar(module = ":dependency-graph")
