@@ -5,5 +5,6 @@
   <extensions defaultExtensionNs="com.intellij">
     <projectFrameCapabilitiesProvider
         implementation="com.pandagit.PandaGitProjectFrameCapabilitiesProvider" />
+    <postStartupActivity implementation="com.pandagit.PandaGitInitialVfsRefreshActivity" />
   </extensions>
 </idea-plugin>

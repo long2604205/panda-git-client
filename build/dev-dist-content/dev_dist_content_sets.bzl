@@ -200,6 +200,7 @@ DEV_DIST_PLUGIN_COMPONENTS = {
                 "windows_aarch64": "//plugins/terminal:intellij.terminal_windows_aarch64_component",
                 "windows_x64": "//plugins/terminal:intellij.terminal_windows_x64_component",
             },
+            "intellij.textmate.plugin": "//build/dev-dist-descriptors/intellij.textmate.plugin:intellij.textmate.plugin_dev_plugin",
             "intellij.editorconfig.plugin": "//build/dev-dist-descriptors/intellij.editorconfig.plugin:intellij.editorconfig.plugin_dev_plugin",
             "intellij.json": "//build/dev-dist-descriptors/intellij.json:intellij.json_dev_plugin",
             "intellij.yaml": "//build/dev-dist-descriptors/intellij.yaml:intellij.yaml_dev_plugin",

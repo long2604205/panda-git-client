@@ -27,6 +27,7 @@ jvm_library(
         "@lib//:kotlin-stdlib",
         "//platform/project-frame",
         "//platform/core-api:core",
+        "//platform/platform-impl:ide-impl",
     ],
 )
 
@@ -44,6 +45,7 @@ jvm_library(
         ":features",
         "//platform/project-frame:project-frame_test_lib",
         "//platform/core-api:core_test_lib",
+        "//platform/platform-impl:ide-impl_test_lib",
     ],
 )
 ### auto-generated section `build intellij.pandagit.features` end

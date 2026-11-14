@@ -37,13 +37,13 @@ private val PANDA_GIT_DROPPED_PLUGINS: List<String> = listOf(
   "intellij.eclipse",
   // Languages a Git client does not edit.
   // `intellij.json` and `intellij.yaml` stay: the GitHub and GitLab plugins parse their API payloads with them.
+  // `intellij.textmate.plugin` stays: it is the syntax highlighter for files no bundled language parser claims.
   "intellij.groovy",
   "intellij.groovy.scripting",
   "intellij.groovy.live.templates",
   "intellij.properties",
   "intellij.toml",
   "intellij.html.tools",
-  "intellij.textmate.plugin",
   "intellij.configurationScript",
   "intellij.markdown",
   "intellij.mermaid",
