@@ -119,6 +119,8 @@ class PandaGitProperties(private val communityHome: Path) : IdeaCommunityPropert
     moduleSet(CommunityModuleSets.rdCommon())
 
     embeddedModule("intellij.idea.community.ide.customization")
+    // The capability that keeps scanning and indexing away from a PandaGit project.
+    module("intellij.pandagit.features")
 
     module("intellij.platform.ide.nonModalWelcomeScreen")
     module("intellij.platform.ide.nonModalWelcomeScreen.frontend")

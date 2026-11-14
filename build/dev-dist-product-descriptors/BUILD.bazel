@@ -222,6 +222,7 @@ dev_dist_product_descriptor(
         "intellij.idea.customization.base",
         "intellij.java.ide.resources",
         "intellij.idea.community.ide.customization",
+        "intellij.pandagit.features",
         "intellij.platform.ide.nonModalWelcomeScreen",
         "intellij.platform.ide.nonModalWelcomeScreen.frontend",
         "intellij.platform.ide.nonModalWelcomeScreen.backend",

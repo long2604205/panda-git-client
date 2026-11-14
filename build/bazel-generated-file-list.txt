@@ -704,6 +704,7 @@ mps/build/intellij.mps.resources
 notebooks/notebook-ui
 notebooks/visualization
 notebooks/visualization/testFramework
+pandagit/features
 pandagit/resources
 platform/analysis-api
 platform/analysis-impl
