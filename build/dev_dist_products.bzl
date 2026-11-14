@@ -33,6 +33,14 @@ DEV_DIST_PRODUCTS = {
         "//community-resources:resources/META-INF/IdeaPlugin.xml",
         "//community-resources:resources/idea/IdeaApplicationInfo.xml",
     ),
+    # `PandaGitProperties`, the Git client. Its product files live in `pandagit/resources`, so the launcher reads
+    # the descriptor that names no Java support.
+    "PandaGit": _ide(
+        "panda_git",
+        "//build:idea_community_images",
+        "//pandagit/resources:src/META-INF/IdeaPlugin.xml",
+        "//pandagit/resources:src/idea/IdeaApplicationInfo.xml",
+    ),
 }
 
 def dev_dist_product(product):

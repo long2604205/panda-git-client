@@ -1,0 +1,17 @@
+<!-- The `essential-plugin` rows name the plugins the IDE must load to start. A Git client ships none of the Java
+     support, so this file states the Git plugins instead. `IdeaApplicationInfo.xml` states `com.intellij.java` and
+     `com.intellij.java.ide`, and the bootstrap rejects an installation that lacks them. -->
+<component xmlns="http://jetbrains.org/intellij/schema/application-info">
+  <version major="2026" minor="3" eap="false"/>
+  <company name="JetBrains s.r.o." url="https://www.jetbrains.com"/>
+  <build number="PG-__BUILD__" date="__BUILD_DATE__" majorReleaseDate="20261105"/>
+  <logo url="/idea_community_logo.png"/>
+  <icon svg="/idea-ce.svg" svg-small="/idea-ce_16.svg"/>
+  <icon-eap svg="/idea-ce-eap.svg" svg-small="/idea-ce-eap_16.svg"/>
+  <names product="PandaGit" script="pandagit" motto="Git client built on the IntelliJ platform"/>
+
+  <essential-plugin>Git4Idea</essential-plugin>
+  <essential-plugin>org.jetbrains.plugins.terminal</essential-plugin>
+  <essential-plugin>com.intellij.modules.json</essential-plugin>
+  <essential-plugin>org.jetbrains.plugins.yaml</essential-plugin>
+</component>

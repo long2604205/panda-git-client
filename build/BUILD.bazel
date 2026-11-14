@@ -306,6 +306,16 @@ intellij_dev_run_configuration(
     product = "Idea",
 )
 
+# The Git-only PandaGit product. It runs the plugins `PandaGitProperties` keeps, so it shows what the Git client
+# does without the Java and Kotlin support.
+intellij_dev_run_configuration(
+    name = "panda_git_client_ui",
+    jvm_flags = [
+        "-Dawt.toolkit.name=auto",
+    ],
+    product = "PandaGit",
+)
+
 ### auto-generated section `dev intellij.platform.jps.build.dependencyGraph` start
 content_module_jar(module = ":dependency-graph")
 ### auto-generated section `dev intellij.platform.jps.build.dependencyGraph` end

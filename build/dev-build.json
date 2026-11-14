@@ -16,6 +16,14 @@
       ],
       "class": "org.jetbrains.intellij.build.IdeaCommunityProperties"
     },
+    "PandaGit": {
+      "modules": [
+        "intellij.idea.community.build",
+        "intellij.idea.community.build.dependencies",
+        "intellij.platform.buildScripts"
+      ],
+      "class": "org.jetbrains.intellij.build.PandaGitProperties"
+    },
     "AndroidStudio": {
       "modules": [
         "intellij.idea.community.build",

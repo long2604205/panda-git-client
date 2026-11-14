@@ -37,6 +37,7 @@ object CommunityDevDistHalf : DevDistHalf {
   override val splitDistributions: Map<String, SplitDevDistribution> = linkedMapOf(
     "AndroidStudio" to SplitDevDistribution(),
     "Idea" to SplitDevDistribution(caseSafeName = "idea_community"),
+    "PandaGit" to SplitDevDistribution(caseSafeName = "pandagit_client"),
   ).also { products ->
     checkSplitProductNamesAreCaseSafe(products.mapValues { it.value.caseSafeName })
   }

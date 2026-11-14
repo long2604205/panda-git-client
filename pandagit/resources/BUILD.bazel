@@ -1,0 +1,40 @@
+load("@rules_jvm//:jvm.bzl", "jvm_library")
+
+### auto-generated section `build intellij.pandagit.resources` start
+jvm_library(
+    name = "resources",
+    srcs = glob(
+        [],
+        allow_empty = True,
+    ),
+    module_name = "intellij.pandagit.resources",
+    resource_strip_prefix = "src",
+    resources = glob(
+        ["src/**/*"],
+    ),
+    visibility = ["//visibility:public"],
+)
+
+jvm_library(
+    name = "resources_test_lib",
+    testonly = True,
+    srcs = glob(
+        [],
+        allow_empty = True,
+    ),
+    module_name = "intellij.pandagit.resources",
+    visibility = ["//visibility:public"],
+    runtime_deps = [":resources"],
+)
+### auto-generated section `build intellij.pandagit.resources` end
+
+### auto-generated section `iml intellij.pandagit.resources` start
+exports_files(
+    [
+        "intellij.pandagit.resources.iml",
+        "src/META-INF/IdeaPlugin.xml",
+        "src/idea/IdeaApplicationInfo.xml",
+    ],
+    visibility = ["//visibility:public"],
+)
+### auto-generated section `iml intellij.pandagit.resources` end
