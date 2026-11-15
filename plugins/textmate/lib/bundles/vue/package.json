@@ -1,0 +1,35 @@
+{
+  "name": "vue",
+  "displayName": "Vue",
+  "description": "Provides syntax highlighting in Vue single-file components.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "contributes": {
+    "languages": [
+      {
+        "id": "vue",
+        "aliases": [
+          "Vue",
+          "vue"
+        ],
+        "extensions": [
+          ".vue"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "vue",
+        "scopeName": "source.vue",
+        "path": "./syntaxes/vue.tmLanguage.json",
+        "embeddedLanguages": {
+          "text.html.basic": "html",
+          "source.css": "css",
+          "source.ts": "typescript",
+          "source.js": "javascript"
+        }
+      }
+    ]
+  }
+}

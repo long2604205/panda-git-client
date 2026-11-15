@@ -6,5 +6,9 @@
     <projectFrameCapabilitiesProvider
         implementation="com.pandagit.PandaGitProjectFrameCapabilitiesProvider" />
     <postStartupActivity implementation="com.pandagit.PandaGitInitialVfsRefreshActivity" />
+    <postStartupActivity implementation="com.pandagit.PandaGitTextMateFileTypeActivity" />
   </extensions>
+  <applicationListeners>
+    <listener class="com.pandagit.PandaGitMenuListener" topic="com.intellij.ide.AppLifecycleListener" />
+  </applicationListeners>
 </idea-plugin>
