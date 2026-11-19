@@ -137,17 +137,7 @@ DEV_DIST_PLUGIN_COMPONENTS = {
     },
     "PandaGit": {
         "bundled": {
-            "intellij.dev": "//build/dev-dist-descriptors/intellij.dev:intellij.dev_dev_plugin",
             "intellij.java.aetherDependencyResolver.plugin": "//build/dev-dist-descriptors/intellij.java.aetherDependencyResolver.plugin:intellij.java.aetherDependencyResolver.plugin_dev_plugin",
-            "intellij.jcef.plugin": {
-                "darwin_aarch64": "//plugins/jcef/plugin:intellij.jcef.plugin_darwin_aarch64_component",
-                "darwin_x64": "//plugins/jcef/plugin:intellij.jcef.plugin_darwin_x64_component",
-                "linux_aarch64": "//plugins/jcef/plugin:intellij.jcef.plugin_linux_aarch64_component",
-                "linux_x64": "//plugins/jcef/plugin:intellij.jcef.plugin_linux_x64_component",
-                "windows_aarch64": "//plugins/jcef/plugin:intellij.jcef.plugin_windows_aarch64_component",
-                "windows_x64": "//plugins/jcef/plugin:intellij.jcef.plugin_windows_x64_component",
-            },
-            "intellij.grid.plugin": "//build/dev-dist-descriptors/intellij.grid.plugin:intellij.grid.plugin_dev_plugin",
             "intellij.jna.plugin": {
                 "darwin_aarch64": "//plugins/jna/plugin:intellij.jna.plugin_darwin_aarch64_component",
                 "darwin_x64": "//plugins/jna/plugin:intellij.jna.plugin_darwin_x64_component",
@@ -164,24 +154,9 @@ DEV_DIST_PLUGIN_COMPONENTS = {
                 "windows_aarch64": "//plugins/pty4j/plugin:intellij.pty4j.plugin_windows_aarch64_component",
                 "windows_x64": "//plugins/pty4j/plugin:intellij.pty4j.plugin_windows_x64_component",
             },
-            "intellij.platform.compose.plugin": {
-                "darwin_aarch64": "//platform/compose/plugin:intellij.platform.compose.plugin_darwin_aarch64_component",
-                "darwin_x64": "//platform/compose/plugin:intellij.platform.compose.plugin_darwin_x64_component",
-                "linux_aarch64": "//platform/compose/plugin:intellij.platform.compose.plugin_linux_aarch64_component",
-                "linux_x64": "//platform/compose/plugin:intellij.platform.compose.plugin_linux_x64_component",
-                "windows_aarch64": "//platform/compose/plugin:intellij.platform.compose.plugin_windows_aarch64_component",
-                "windows_x64": "//platform/compose/plugin:intellij.platform.compose.plugin_windows_x64_component",
-            },
-            "intellij.platform.bookmarks.plugin": "//platform/bookmarks/plugin:intellij.platform.bookmarks.plugin_dev_plugin",
             "intellij.platform.navbar.plugin": "//platform/navbar/plugin:intellij.platform.navbar.plugin_dev_plugin",
-            "intellij.platform.problemView.plugin": "//platform/problemsView/plugin:intellij.platform.problemView.plugin_dev_plugin",
             "intellij.platform.testRunner.plugin": "//build/dev-dist-descriptors/intellij.platform.testRunner.plugin:intellij.platform.testRunner.plugin_dev_plugin",
             "intellij.platform.recentFiles.plugin": "//platform/recentFiles/plugin:intellij.platform.recentFiles.plugin_dev_plugin",
-            "intellij.platform.structuralSearch.plugin": "//platform/structuralsearch/plugin:intellij.platform.structuralSearch.plugin_dev_plugin",
-            "intellij.platform.structureView.plugin": "//platform/structure-view-impl/plugin:intellij.platform.structureView.plugin_dev_plugin",
-            "intellij.platform.tasks.plugin": "//platform/tasks-platform-impl/plugin:intellij.platform.tasks.plugin_dev_plugin",
-            "intellij.platform.execution.serviceView.plugin": "//platform/execution.serviceView/plugin:intellij.platform.execution.serviceView.plugin_dev_plugin",
-            "intellij.platform.todo.plugin": "//platform/todo/plugin:intellij.platform.todo.plugin_dev_plugin",
             "intellij.platform.vcs.plugin": {
                 "darwin_aarch64": "//platform/vcs/plugin:intellij.platform.vcs.plugin_darwin_aarch64_component",
                 "darwin_x64": "//platform/vcs/plugin:intellij.platform.vcs.plugin_darwin_x64_component",

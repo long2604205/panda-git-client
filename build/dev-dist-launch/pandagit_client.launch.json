@@ -16,7 +16,6 @@
       "pathsSelector": "PandaGit2026.3",
       "jnaNativeDir": "plugins/jna-plugin/lib/jna",
       "pty4jNativeDir": "plugins/pty4j-plugin/lib/pty4j",
-      "skikoNativeDir": "plugins/platform-compose-plugin/lib/skiko-awt-runtime-all",
       "platformPrefix": "Idea",
       "splash": true,
       "nativeAccess": true
@@ -38,7 +37,6 @@
         "pathsSelector": "PandaGit2026.3",
         "jnaNativeDir": "plugins/jna-plugin/lib/jna",
         "pty4jNativeDir": "plugins/pty4j-plugin/lib/pty4j",
-        "skikoNativeDir": "plugins/platform-compose-plugin/lib/skiko-awt-runtime-all",
         "platformPrefix": "Idea",
         "splash": true,
         "nativeAccess": true

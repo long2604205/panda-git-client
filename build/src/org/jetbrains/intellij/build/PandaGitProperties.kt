@@ -60,6 +60,28 @@ private val PANDA_GIT_DROPPED_PLUGINS: List<String> = listOf(
   "intellij.keymap.eclipse",
   "intellij.keymap.visualStudio",
   "intellij.keymap.netbeans",
+  // Editor navigation aids and analysis views. A Git client reads a diff; it does not browse a symbol tree, search
+  // structurally, collect problems, or track a TODO.
+  "intellij.platform.bookmarks.plugin",
+  "intellij.platform.structuralSearch.plugin",
+  "intellij.platform.structureView.plugin",
+  "intellij.platform.problemView.plugin",
+  "intellij.platform.todo.plugin",
+  "intellij.platform.tasks.plugin",
+  "intellij.platform.execution.serviceView.plugin",
+  // The plugin development toolchain. It ships a settings page and the module that reads plugin descriptors, which a
+  // Git client never opens.
+  "intellij.devkit",
+  "intellij.dev",
+  // The table viewer for CSV and database rows. The commit list draws its own tree.
+  "intellij.grid.plugin",
+  // Compose UI. The plugin carries Compose, Jewel, and Skiko, and nothing in this product draws with them.
+  "intellij.platform.compose.plugin",
+  // The embedded Chromium browser. No shipped feature opens a web view, and the native bundle is the largest file in
+  // the distribution.
+  "intellij.jcef.plugin",
+  // `intellij.jna.plugin` stays on purpose: `intellij.libraries.pty4j` links `intellij.libraries.jna`, and the Terminal
+  // uses pty4j for every local shell. Removing JNA breaks the Terminal that this product keeps.
 )
 
 class PandaGitProperties(private val communityHome: Path) : IdeaCommunityProperties(communityHome) {
@@ -85,6 +107,18 @@ class PandaGitProperties(private val communityHome: Path) : IdeaCommunityPropert
     // `CE_CLASS_VERSIONS` states the bytecode level of jars in plugins this product drops. The check fails on a rule
     // that matches no file, so keep only the rules for the platform jars in `lib/`.
     versionCheckerConfig = CE_CLASS_VERSIONS.filterKeys { path -> !path.startsWith("plugins/") }
+    // This product ships an installer, not a Maven repository. The community build validates that every Jewel module
+    // produces a Maven artifact, and this product drops those modules, so the check would fail on a module that is not
+    // built. Nothing here publishes to Maven Central, so the validation is switched off.
+    mavenArtifacts.validate = { _, _ -> }
+    // A Git client holds a file tree, a diff and a commit list. The default 2 GB heap reserves address space this
+    // product never fills: a measured session commits 200 MB and uses 130 MB. 768 MB keeps a five-fold margin over the
+    // measurement, so a large diff or a long history still fits. 512 MB saves no further resident memory, because the
+    // working set is metaspace and native buffers, not heap.
+    customJvmMemoryOptions = mapOf(
+      "-Xms" to "128m",
+      "-Xmx" to "768m",
+    )
   }
 
   /**
